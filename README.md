@@ -16,6 +16,14 @@ using UnityParsers;
 ```c#
 private const string VECTOR3 = "(-50, 30, 100)";
 Parsers.Parse<UnityEngine.Vector2Int>(VECTOR3); // This will gives us error! Use TryParse instead for error-proud solution!
+
+For an example:
+
+if (Parsers.TryParseVector3(VECTOR3, out UnityEngine.Vector3 result))
+{
+
+}
+
 ```
 
 ```c#
