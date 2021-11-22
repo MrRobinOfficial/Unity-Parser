@@ -1,7 +1,7 @@
 # UnityParsers
 A parsing system for Unity
 
-#Intro
+# Intro
 
 UnityParsers is a helping system for folks who wants to parser string values into object values. NOTE: This system will try to parse string value as user input into object value (For an example: boolean as on = true and off = false), because of this is NOT recommend to use in serializing data. 
 
@@ -9,7 +9,6 @@ This parsing system was built using [NCalc](https://github.com/ncalc/ncalc).
 
 #How To Use It:
 
-`
 using UnityParsers;
 
 public class ParsingExample
@@ -34,4 +33,3 @@ public class ParsingExample
         bool value = Parsers.ParseBoolean("off"); // This will return false
     }
 }
-`
