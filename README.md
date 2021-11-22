@@ -7,8 +7,9 @@ UnityParsers is a helping system for folks who wants to parser string values int
 
 This parsing system was built using [NCalc](https://github.com/ncalc/ncalc).
 
-#How To Use It:
+# How To Use It:
 
+```c#
 using UnityParsers;
 
 public class ParsingExample
@@ -33,3 +34,4 @@ public class ParsingExample
         bool value = Parsers.ParseBoolean("off"); // This will return false
     }
 }
+```
