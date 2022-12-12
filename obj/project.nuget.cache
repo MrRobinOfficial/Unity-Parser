@@ -1,13 +1,17 @@
 {
   "version": 2,
-  "dgSpecHash": "3TZuXOEaOrlOGnGaW4JmOTM/9e/zfVlszr7R9alIEcEl4aDRKVN1MZUl5M6uMnXnLaWGhuHsuqUPfuVYzFBdUg==",
+  "dgSpecHash": "VGuG/1Ww0X21Y1g0vaVcIziBmzTpp0QmkS3WV5wV2UYWbjdXWjt7YinG7753R0CE1mhE2htHlCpMiubp6SlqTQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\Robin Johannesson\\Desktop\\Projects\\UnityParser\\UnityParser.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Robin Johannesson\\.nuget\\packages\\antlr3.runtime\\3.5.1\\antlr3.runtime.3.5.1.nupkg.sha512",
     "C:\\Users\\Robin Johannesson\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
     "C:\\Users\\Robin Johannesson\\.nuget\\packages\\ncalcsync\\3.6.0\\ncalcsync.3.6.0.nupkg.sha512",
-    "C:\\Users\\Robin Johannesson\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+    "C:\\Users\\Robin Johannesson\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",
+    "C:\\Users\\Robin Johannesson\\.nuget\\packages\\system.buffers\\4.5.1\\system.buffers.4.5.1.nupkg.sha512",
+    "C:\\Users\\Robin Johannesson\\.nuget\\packages\\system.memory\\4.5.5\\system.memory.4.5.5.nupkg.sha512",
+    "C:\\Users\\Robin Johannesson\\.nuget\\packages\\system.numerics.vectors\\4.4.0\\system.numerics.vectors.4.4.0.nupkg.sha512",
+    "C:\\Users\\Robin Johannesson\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\4.5.3\\system.runtime.compilerservices.unsafe.4.5.3.nupkg.sha512"
   ],
   "logs": []
 }

@@ -361,3 +361,7 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# UnityParser
+!\obj\Debug\netstandard2.0\UnityParser.dll
+!\obj\Release\netstandard2.0\UnityParser.dll

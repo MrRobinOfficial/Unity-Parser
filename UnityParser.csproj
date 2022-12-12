@@ -6,12 +6,10 @@
 
   <ItemGroup>
     <PackageReference Include="NCalcSync" Version="3.6.0" />
+    <PackageReference Include="System.Memory" Version="4.5.5" />
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="UnityEngine">
-      <HintPath>..\..\..\..\..\Program Files\Unity\Hub\Editor\2018.4.36f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEngine.CoreModule">
       <HintPath>..\..\..\..\..\Program Files\Unity\Hub\Editor\2018.4.36f1\Editor\Data\Managed\UnityEngine\UnityEngine.CoreModule.dll</HintPath>
     </Reference>
