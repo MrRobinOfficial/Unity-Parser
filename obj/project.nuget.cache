@@ -1,10 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "+5uF5wLXxAv+luItUqAYIymBO3YTKiSsBOYH5dga1V0XqxMV3dOMc7iYXWmkKxePDmoB3I4h6il1wt8mOCMZ5A==",
+  "dgSpecHash": "3TZuXOEaOrlOGnGaW4JmOTM/9e/zfVlszr7R9alIEcEl4aDRKVN1MZUl5M6uMnXnLaWGhuHsuqUPfuVYzFBdUg==",
   "success": true,
   "projectFilePath": "C:\\Users\\Robin Johannesson\\Desktop\\Projects\\UnityParser\\UnityParser.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Robin Johannesson\\.nuget\\packages\\antlr3.runtime\\3.5.1\\antlr3.runtime.3.5.1.nupkg.sha512",
     "C:\\Users\\Robin Johannesson\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\Robin Johannesson\\.nuget\\packages\\ncalcsync\\3.6.0\\ncalcsync.3.6.0.nupkg.sha512",
     "C:\\Users\\Robin Johannesson\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
   ],
   "logs": []

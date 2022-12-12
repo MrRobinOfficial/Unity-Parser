@@ -2,6 +2,22 @@
   "version": 3,
   "targets": {
     ".NETStandard,Version=v2.0": {
+      "Antlr3.Runtime/3.5.1": {
+        "type": "package",
+        "dependencies": {
+          "NETStandard.Library": "1.6.0"
+        },
+        "compile": {
+          "lib/netstandard1.1/Antlr3.Runtime.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard1.1/Antlr3.Runtime.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Microsoft.NETCore.Platforms/1.1.0": {
         "type": "package",
         "compile": {
@@ -9,6 +25,18 @@
         },
         "runtime": {
           "lib/netstandard1.0/_._": {}
+        }
+      },
+      "NCalcSync/3.6.0": {
+        "type": "package",
+        "dependencies": {
+          "Antlr3.Runtime": "3.5.1"
+        },
+        "compile": {
+          "lib/netstandard2.0/NCalc.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/NCalc.dll": {}
         }
       },
       "NETStandard.Library/2.0.3": {
@@ -29,6 +57,25 @@
     }
   },
   "libraries": {
+    "Antlr3.Runtime/3.5.1": {
+      "sha512": "ZwCEpLCLZXkjzf1lYEixp9hgVlYYk33ACHn6xjFyVhGRi2BpoYQez0qtatbetdylASWYTG+cGz0CGR4z66JM4w==",
+      "type": "package",
+      "path": "antlr3.runtime/3.5.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "antlr3.runtime.3.5.1.nupkg.sha512",
+        "antlr3.runtime.nuspec",
+        "lib/net20/Antlr3.Runtime.dll",
+        "lib/net20/Antlr3.Runtime.xml",
+        "lib/net40-client/Antlr3.Runtime.dll",
+        "lib/net40-client/Antlr3.Runtime.xml",
+        "lib/netstandard1.1/Antlr3.Runtime.dll",
+        "lib/netstandard1.1/Antlr3.Runtime.xml",
+        "lib/portable-net4+sl5+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1/Antlr3.Runtime.dll",
+        "lib/portable-net4+sl5+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1/Antlr3.Runtime.xml"
+      ]
+    },
     "Microsoft.NETCore.Platforms/1.1.0": {
       "sha512": "kz0PEW2lhqygehI/d6XsPCQzD7ff7gUJaVGPVETX611eadGsA3A877GdSlU0LRVMCTH/+P3o2iDTak+S08V2+A==",
       "type": "package",
@@ -42,6 +89,22 @@
         "microsoft.netcore.platforms.1.1.0.nupkg.sha512",
         "microsoft.netcore.platforms.nuspec",
         "runtime.json"
+      ]
+    },
+    "NCalcSync/3.6.0": {
+      "sha512": "r1u1/agxnOKc6vve/yqL+8GYmCtBc4nwRgqR4Kq6SoXPAAcloCw2Uap7CXdVOg+uHqNO3tJUqzhcsOFLnnMMxw==",
+      "type": "package",
+      "path": "ncalcsync/3.6.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "NCalc.png",
+        "README.md",
+        "lib/net461/NCalc.dll",
+        "lib/net5.0/NCalc.dll",
+        "lib/netstandard2.0/NCalc.dll",
+        "ncalcsync.3.6.0.nupkg.sha512",
+        "ncalcsync.nuspec"
       ]
     },
     "NETStandard.Library/2.0.3": {
@@ -176,6 +239,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETStandard,Version=v2.0": [
+      "NCalcSync >= 3.6.0",
       "NETStandard.Library >= 2.0.3"
     ]
   },
@@ -223,6 +287,10 @@
       "netstandard2.0": {
         "targetAlias": "netstandard2.0",
         "dependencies": {
+          "NCalcSync": {
+            "target": "Package",
+            "version": "[3.6.0, )"
+          },
           "NETStandard.Library": {
             "suppressParent": "All",
             "target": "Package",
