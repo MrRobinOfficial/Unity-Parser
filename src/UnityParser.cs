@@ -4,13 +4,522 @@ using System.Collections.Generic;
 using uParser.Exceptions;
 using NCalc;
 using System.Globalization;
+using System.Text.RegularExpressions;
+using System.Text;
+using UnityEngine.SceneManagement;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace uParser
 {
     /// @brief
     public static partial class UnityParser
     {
-      //public static bool TryParseVector3(ReadOnlySpan<char> input, out Vector3 result)
+        public static ulong ParseUnsignedLong(string input)
+        {
+            if (input == null)
+                return 0ul;
+
+            input = input
+                .Trim(k_TrimChars);
+
+            return 0ul;
+        }
+
+        public static uint ParseUnsignedInteger(string input)
+        {
+            if (input == null)
+                return 0u;
+
+            input = input
+                .Trim(k_TrimChars);
+
+            return 0u;
+        }
+
+        public static ushort ParseUnsignedShort(string input)
+        {
+            if (input == null)
+                return 0;
+
+            input = input
+                .Trim(k_TrimChars);
+
+            return 0;
+        }
+
+        public static short ParseShort(string input)
+        {
+            if (input == null)
+                return 0;
+
+            input = input
+                .Trim(k_TrimChars);
+
+            return 0;
+        }
+
+        public static int ParseInteger(string input)
+        {
+            if (input == null)
+                return 0;
+
+            input = input
+                .Trim(k_TrimChars);
+
+            return 0;
+        }
+
+        public static long ParseLong(string input)
+        {
+            if (input == null)
+                return 0L;
+
+            input = input
+                .Trim(k_TrimChars);
+
+            return 0L;
+        }
+
+        public static float ParseFloat(string input)
+        {
+            if (input == null)
+                return 0f;
+
+            input = input
+                .Trim(k_TrimChars);
+
+            return 0f;
+        }
+
+        public static double ParseDouble(string input)
+        {
+            if (input == null)
+                return 0d;
+
+            input = input
+                .Trim(k_TrimChars);
+
+            return 0d;
+        }
+
+        public static decimal ParseDecimal(string input)
+        {
+            if (input == null)
+                return 0m;
+
+            input = input
+                .Trim(k_TrimChars);
+
+            return 0m;
+        }
+
+        public static sbyte ParseSignedByte(string input)
+        {
+            if (input == null)
+                return 0;
+
+            input = input
+                .Trim(k_TrimChars);
+
+            return 0;
+        }
+
+        public static bool ParseBoolean(string input)
+        {
+            if (input == null)
+                return false;
+
+            input = input
+                .ToLower()
+                .Trim(k_TrimChars);
+
+            switch (input)
+            {
+                case "true":
+                case "on":
+                case "yes":
+                case "1":
+                    return true;
+
+                case "false":
+                case "off":
+                case "no":
+                case "0":
+                    return false;
+
+                default:
+                    throw new ParserInputException(message: $"Cannot parse '{input}' to a boolean");
+            }
+        }
+
+        public static byte ParseByte(string input)
+        {
+            if (input == null)
+                return 0;
+
+            input = input
+                .Trim(k_TrimChars);
+
+            return 0;
+        }
+
+        public static char ParseChar(string input)
+        {
+            if (input == null)
+                return char.MinValue;
+
+            input = input
+                .Trim(k_TrimChars);
+
+            return char.MinValue;
+        }
+
+        public static Matrix4x4 ParseMatrix4x4(string input)
+        {
+            if (input == null)
+                return Matrix4x4.identity;
+
+            input = input
+                .ToLower()
+                .Trim(k_TrimChars);
+
+            return Matrix4x4.identity;
+        }
+
+        public static Quaternion ParseQuaternion(string input)
+        {
+            if (input == null)
+                return Quaternion.identity;
+
+            input = input
+                .ToLower()
+                .Trim(k_TrimChars);
+
+            float[] values = GenericParser<float, Quaternion>(input, 4, 4);
+            return new Quaternion(values[0], values[1], values[2], values[3]);
+        }
+
+        public static Vector4 ParseVector4(string input)
+        {
+            if (input == null)
+                return Vector4.zero;
+
+            input = input
+                .ToLower()
+                .Trim(k_TrimChars);
+
+            float[] values = GenericParser<float, Vector4>(input, 2, 4);
+            return new Vector4(values[0], values[1], (values.Length > 2) ? values[2] : 0f, (values.Length > 3) ? values[3] : 0f);
+        }
+
+        /// @brief Parse Vector3
+        /// @param[in] input String input
+        /// @return Result in [Vector2]
+        public static Vector3 ParseVector3(string input)
+        {
+            if (input == null)
+                return Vector3.zero;
+
+            input = input
+                .ToLower()
+                .Trim(k_TrimChars);
+
+            var subStrings = input.Split(k_SeperateChar, StringSplitOptions.RemoveEmptyEntries);
+
+            if (subStrings.Length < 3)
+                throw new ParserInputException(message: "Parsing into <Vector3> requires 3 float values");
+
+            return new Vector3
+            {
+                x = float.Parse(subStrings[0]),
+                y = float.Parse(subStrings[1]),
+                z = float.Parse(subStrings[2]),
+            };
+        }
+
+        /// @brief Parse Vector2
+        /// @param[in] input String input
+        /// @return Result in [Vector2]
+        public static Vector2 ParseVector2(string input)
+        {
+            if (input == null)
+                return Vector2.zero;
+
+            input = input
+                .ToLower()
+                .Trim(k_TrimChars);
+
+            var subStrings = input.Split(k_SeperateChar);
+
+            if (subStrings.Length < 2)
+                throw new ParserInputException(message: "Parsing into <Vector3> requires 2 float values");
+
+            return new Vector2
+            {
+                x = float.Parse(subStrings[0]),
+                y = float.Parse(subStrings[1]),
+            };
+        }
+
+        //public static Vector3 ParseVector3(string value)
+        //{
+        //    float[] values = GenericParser<float, Vector3>(value.Trim('(', ')'), 2, 3);
+        //    return new Vector3(values[0], values[1], (values.Length > 2) ? values[2] : 0f);
+        //}
+
+        //public static Vector2 ParseVector2(string value)
+        //{
+        //    float[] values = GenericParser<float, Vector2>(value.Trim('(', ')'), 2, 2);
+        //    return new Vector2(values[0], values[1]);
+        //}
+
+        public static Vector3Int ParseVector3Int(string input)
+        {
+            if (input == null)
+                return Vector3Int.zero;
+
+            input = input
+                .ToLower()
+                .Trim(k_TrimChars);
+
+            int[] values = GenericParser<int, Vector3Int>(input, 2, 3);
+            return new Vector3Int(values[0], values[1], (values.Length > 2) ? values[2] : 0);
+        }
+
+        public static Vector2Int ParseVector2Int(string input)
+        {
+            if (input == null)
+                return Vector2Int.zero;
+
+            input = input
+                .ToLower()
+                .Trim(k_TrimChars);
+
+            int[] values = GenericParser<int, Vector2Int>(input, 2, 2);
+            return new Vector2Int(values[0], values[1]);
+        }
+
+        public static Color32 ParseColor32(string input)
+        {
+            if (input == null)
+                return default;
+
+            input = input
+                .ToLower()
+                .Trim(k_TrimChars);
+
+            var match = Regex.Match(input, k_HexColorRegxPattern, RegexOptions.Compiled);
+
+            if (match.Success &&
+                ColorUtility.TryParseHtmlString(input, out var color))
+                return color;
+
+            byte[] values = GenericParser<byte, Color32>(input, 3, 4);
+
+            return new Color32(values[0],
+                               values[1],
+                               values[2],
+                               (values.Length > 3) ? values[3] : byte.MaxValue);
+        }
+
+        public static Color ParseColor(string input)
+        {
+            if (input == null)
+                return default;
+
+            input = input
+                .ToLower()
+                .Trim(k_TrimChars);
+
+            var match = Regex.Match(input, k_HexColorRegxPattern, RegexOptions.Compiled);
+
+            if (match.Success &&
+                ColorUtility.TryParseHtmlString(input, out var color))
+                return color;
+
+            float[] values = GenericParser<float, Color>(input, 3, 4);
+
+            return new Color(values[0],
+                             values[1],
+                             values[2],
+                             (values.Length > 3) ? values[3] : 1f);
+        }
+
+        public static Rect ParseRect(string input)
+        {
+            if (input == null)
+                return Rect.zero;
+
+            input = input
+                .ToLower()
+                .Trim(k_TrimChars);
+
+            float[] values = GenericParser<float, Rect>(input, 4, 4);
+            return new Rect(values[0], values[1], values[2], values[3]);
+        }
+
+        public static Hash128 ParseHash128(string input)
+        {
+            if (input == null)
+                return default;
+
+            input = input
+                .ToLower()
+                .Trim(k_TrimChars);
+
+            return Hash128.Parse(input);
+        }
+
+        public static Scene ParseScene(string input)
+        {
+            if (input == null)
+                return default;
+
+            input = input
+                .Trim(k_TrimChars);
+
+            return SceneManager.GetSceneByName(input);
+        }
+
+        public static Texture2D ParseTexture2D(string input)
+        {
+            if (input == null)
+                return null;
+
+            input = input
+                .ToLower()
+                .Trim(k_TrimChars);
+
+            if (!input.StartsWith(k_PathPrefix, StringComparison.InvariantCultureIgnoreCase))
+                return null;
+
+            return Resources.Load<Texture2D>(input);
+        }
+
+        public static Sprite ParseSprite(string input)
+        {
+            if (input == null)
+                return null;
+
+            input = input
+                .ToLower()
+                .Trim(k_TrimChars);
+
+            if (!input.StartsWith(k_PathPrefix, StringComparison.InvariantCultureIgnoreCase))
+                return null;
+
+            return Resources.Load<Sprite>(input);
+        }
+
+        public static Material ParseMaterial(string input)
+        {
+            if (input == null)
+                return null;
+
+            input = input
+                .ToLower()
+                .Trim(k_TrimChars);
+
+            if (!input.StartsWith(k_PathPrefix, StringComparison.InvariantCultureIgnoreCase))
+                return null;
+
+            return Resources.Load<Material>(input);
+        }
+
+        public static GameObject ParseGameObject(string input)
+        {
+            if (input == null)
+                return null;
+
+            input = input
+                .ToLower()
+                .Trim(k_TrimChars);
+
+            if (input.StartsWith(k_PathPrefix, StringComparison.InvariantCultureIgnoreCase))
+            {
+                input = input
+                    .Substring(startIndex: 4)
+                    .Trim(k_TrimChars);
+
+                return Resources.Load<GameObject>(input);
+            }
+
+            for (int i = 0; i < SceneManager.sceneCount; i++)
+            {
+                GameObject[] objects = SceneManager.GetSceneAt(i).GetRootGameObjects();
+
+                for (int j = 0; j < objects.Length; j++)
+                {
+                    Transform[] children = objects[j].GetComponentsInChildren<Transform>(includeInactive: true);
+
+                    for (int k = 0; k < children.Length; k++)
+                    {
+                        if (string.Equals(children[k].name, input, StringComparison.InvariantCultureIgnoreCase))
+                            return children[k].gameObject;
+                    }
+                }
+            }
+
+            return null;
+        }
+
+        public static Component ParseComponent(string input)
+        {
+            if (input == null)
+                return null;
+
+            input = input
+                .ToLower()
+                .Trim(k_TrimChars);
+
+            if (input.StartsWith(k_PathPrefix, StringComparison.InvariantCultureIgnoreCase))
+            {
+                input = input
+                    .Substring(startIndex: 4)
+                    .Trim(k_TrimChars);
+
+                return Resources.Load<Component>(input);
+            }
+
+            for (int i = 0; i < SceneManager.sceneCount; i++)
+            {
+                GameObject[] objects = SceneManager.GetSceneAt(i).GetRootGameObjects();
+
+                for (int j = 0; j < objects.Length; j++)
+                {
+                    Transform[] children = objects[j].GetComponentsInChildren<Transform>(includeInactive: true);
+
+                    for (int k = 0; k < children.Length; k++)
+                    {
+                        if (string.Equals(children[k].name, input, StringComparison.CurrentCultureIgnoreCase))
+                            return children[k];
+                    }
+                }
+            }
+
+            return null;
+        }
+
+        public static T ParseMath<T>(string input) where T : unmanaged
+        {
+            var ex = new Expression(input);
+            var result = ex.Evaluate();
+
+            if (result.GetType() != typeof(T))
+                throw new ParserInputException(message: $"Failed casting into <{typeof(T).Name}>");
+
+            return (T)result;
+        }
+
+        public static object ParseMath(string input)
+        {
+            var ex = new Expression(input);
+            return ex.Evaluate();
+        }
+
+        // public static AudioClip ParseAudioClip(string input) => Resources.Load<AudioClip>(input);
+
+        //public static bool TryParseVector3(ReadOnlySpan<char> input, out Vector3 result)
         //{
         //    result = default;
 
@@ -34,238 +543,6 @@ namespace uParser
 
         //    result = new Vector3(x, y, z);
         //    return true;
-        //}
-        
-        /// <summary>
-        /// Hello World
-        /// </summary>
-        public static void Test()
-        {
-            
-        }
-
-        /// @brief Try Parse Vector3
-        /// @param[in] input String input
-        /// @param[out] result Convert string into Vector3
-        /// @return Boolean whether it succeeded or not
-        public static bool TryParseVector3(string input, out Vector3 result)
-        {
-            result = Vector3.zero;
-            input = input.Trim(k_TrimChars);
-
-            var subStrings = input.Split(k_SeperateChar, StringSplitOptions.RemoveEmptyEntries);
-
-            if (float.TryParse(subStrings[0], out var x) &&
-                float.TryParse(subStrings[1], out var y) &&
-                float.TryParse(subStrings[2], out var z))
-                result.Set(x, y, z);
-
-            return false;
-        }
-
-        /// @brief Parse Vector3
-        /// @param[in] input String input
-        /// @return Result in [Vector2]
-        public static Vector3 ParseVector3(string input)
-        {
-            input = input.Trim(k_TrimChars);
-
-            var subStrings = input.Split(k_SeperateChar, StringSplitOptions.RemoveEmptyEntries);
-
-            return new Vector3
-            {
-                x = float.Parse(subStrings[0]),
-                y = float.Parse(subStrings[1]),
-                z = float.Parse(subStrings[2]),
-            };
-        }
-
-        /// @brief Try Parse Vector2
-        /// @param[in] input String input
-        /// @param[out] result Convert string into Vector3
-        /// @return Boolean whether it succeeded or not
-        public static bool TryParseVector2(string input, out Vector2 result)
-        {
-            result = Vector3.zero;
-            input = input.Trim(k_TrimChars);
-
-            var subStrings = input.Split(k_SeperateChar);
-
-            if (float.TryParse(subStrings[0], out var x) &&
-                float.TryParse(subStrings[1], out var y))
-                result.Set(x, y);
-
-            return false;
-        }
-
-        /// @brief Parse Vector2
-        /// @param[in] input String input
-        /// @return Result in [Vector2]
-        public static Vector2 ParseVector2(string input)
-        {
-            input = input.Trim(k_TrimChars);
-
-            var subStrings = input.Split(k_SeperateChar);
-
-            return new Vector2
-            {
-                x = float.Parse(subStrings[0]),
-                y = float.Parse(subStrings[1]),
-            };
-        }
-
-        //public static bool TryParse<T>(string value, out object result) where T : struct
-        //{
-        //    if (float.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out var b))
-        //    {
-        //        result = b;
-        //        return true;
-        //    }
-        //    if (int.TryParse(value, NumberStyles.Integer, CultureInfo.InvariantCulture, out var a))
-        //    {
-        //        result = a;
-        //        return true;
-        //    }
-        //    if (double.TryParse(value, NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out var c))
-        //    {
-        //        result = c;
-        //        return true;
-        //    }
-        //    if (decimal.TryParse(value, NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out var d))
-        //    {
-        //        result = d;
-        //        return true;
-        //    }
-        //    if (long.TryParse(value, NumberStyles.Integer, CultureInfo.InvariantCulture, out var e))
-        //    {
-        //        result = e;
-        //        return true;
-        //    }
-        //    if (ulong.TryParse(value, NumberStyles.Integer, CultureInfo.InvariantCulture, out var f))
-        //    {
-        //        result = f;
-        //        return true;
-        //    }
-        //    if (short.TryParse(value, NumberStyles.Integer, CultureInfo.InvariantCulture, out var g))
-        //    {
-        //        result = g;
-        //        return true;
-        //    }
-        //    if (ushort.TryParse(value, NumberStyles.Integer, CultureInfo.InvariantCulture, out var h))
-        //    {
-        //        result = h;
-        //        return true;
-        //    }
-        //    if (byte.TryParse(value, NumberStyles.Integer, CultureInfo.InvariantCulture, out var i))
-        //    {
-        //        result = i;
-        //        return true;
-        //    }
-        //    if (sbyte.TryParse(value, NumberStyles.Integer, CultureInfo.InvariantCulture, out var j))
-        //    {
-        //        result = j;
-        //        return true;
-        //    }
-        //    if (TryParseBoolean(value, out var k))
-        //    {
-        //        result = k;
-        //        return true;
-        //    }
-        //    if (char.TryParse(value, out var l))
-        //    {
-        //        result = l;
-        //        return true;
-        //    }
-        //    if (uint.TryParse(value, NumberStyles.Number, CultureInfo.InvariantCulture, out var m))
-        //    {
-        //        result = m;
-        //        return true;
-        //    }
-        //    if (TryParseString(value, out var str))
-        //    {
-        //        result = str;
-        //        return true;
-        //    }
-        //    string[] array = value.Replace(" ", "").Split(new char[1] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-        //    for (int x = 0; x < array.Length; x++)
-        //    {
-        //        Expression exp = new Expression(array[x], EvaluateOptions.IgnoreCase);
-        //        array[x] = $"{exp.Evaluate()}";
-        //        array[x] = array[x].Replace(',', '.');
-        //        value = string.Join(", ", array);
-        //    }
-        //    if (TryParseVector2Int(value, out var vector2Int))
-        //    {
-        //        result = vector2Int;
-        //        return true;
-        //    }
-        //    if (TryParseVector3Int(value, out var vector3Int))
-        //    {
-        //        result = vector3Int;
-        //        return true;
-        //    }
-        //    if (TryParseVector2(value, out var vector2))
-        //    {
-        //        result = vector2;
-        //        return true;
-        //    }
-        //    if (TryParseVector3(value, out var vector3))
-        //    {
-        //        result = vector3;
-        //        return true;
-        //    }
-        //    if (TryParseVector4(value, out var vector4))
-        //    {
-        //        result = vector4;
-        //        return true;
-        //    }
-        //    if (TryParseQuaternion(value, out var rot))
-        //    {
-        //        result = rot;
-        //        return true;
-        //    }
-        //    if (TryParseColor(value, out var color))
-        //    {
-        //        result = color;
-        //        return true;
-        //    }
-        //    if (TryParseColor32(value, out var color2))
-        //    {
-        //        result = color2;
-        //        return true;
-        //    }
-        //    if (TryParseGameObject(value, out var obj))
-        //    {
-        //        result = obj;
-        //        return true;
-        //    }
-        //    if (TryParseTexture2D(value, out var tex2D))
-        //    {
-        //        result = tex2D;
-        //        return true;
-        //    }
-        //    if (TryParseAudioClip(value, out var clip))
-        //    {
-        //        result = clip;
-        //        return true;
-        //    }
-        //    if (TryParseSprite(value, out var sprite))
-        //    {
-        //        result = sprite;
-        //        return true;
-        //    }
-        //    if (TryParseMaterial(value, out var mat))
-        //    {
-        //        result = mat;
-        //        return true;
-        //    }
-        //    if (TryParseRect(value, out var rect))
-        //    {
-        //        result = rect;
-        //        return true;
-        //    }
-        //    result = null;
-        //    return false;
         //}
     }
 }

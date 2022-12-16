@@ -6,6 +6,9 @@ namespace uParser
 {
     public static partial class UnityParser
     {
+        private const string k_HexColorRegxPattern = @"^#(?:[0-9a-fA-F]{3}){1,2}$";
+        private const string k_PathPrefix = "p:";
+
         private static readonly char[] k_TrimChars = new char[]
         {
             '(',
