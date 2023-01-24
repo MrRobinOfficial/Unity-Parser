@@ -1,6 +1,6 @@
 <!-- markdownlint-disable-next-line -->
 <p align="center">
-  <a href="#" rel="noopener" target="_blank"><img width="150" src="" alt="Parser logo"></a>
+  <a href="#" rel="noopener" target="_blank"><img width="150" src="Resources/UnityParser_128x128.png" alt="Parser logo"></a>
 </p>
 
 <h1 align="center">Parser [Unity Engine]</h1>
