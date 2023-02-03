@@ -12,6 +12,7 @@
 This parsing system was built using [NCalc](https://github.com/ncalc/ncalc).<br><br>
 
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/mrrobinofficial/unity-parser/blob/HEAD/LICENSE.txt)
+![maintenance-status](https://img.shields.io/badge/maintenance-as--is-yellow.svg)
 
 </div>
 
